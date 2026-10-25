@@ -1,0 +1,31 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Урок 9. Гра «Уникай перешкод» · PyGame Zero</title><meta name="description" content="Керуємо гравцем, рухаємо перешкоди та перевіряємо зіткнення. Кожне успішне ухилення може додати бал."><link rel="stylesheet" href="styles.css"></head><body><header><a class="brand" href="../programming.html">Class<span>Lus</span> ✦</a><nav><a href="../index.html#directions">Напрями</a><a href="../programming.html">Програмування</a><a href="https://lusbul.github.io/classlus/" target="_blank" rel="noopener">ClassLus ↗</a></nav></header><main class="wrap"><a class="crumb" href="index.html">← До курсу PyGame Zero</a><section class="lesson-head"><div><div class="badge">Урок 9 із 10 · Рух, умови й зіткнення</div><h1>Гра «Уникай перешкод»</h1><p class="lead">Керуємо гравцем, рухаємо перешкоди та перевіряємо зіткнення. Кожне успішне ухилення може додати бал.</p><div class="links"><a class="button" href="https://samel.ho.ua/" target="_blank" rel="noopener">Відкрити ePython ↗</a><a class="button secondary" href="https://ed-info.github.io/pgz/" target="_blank" rel="noopener">Відкрити PGZ Studio ↗</a></div></div><img src="assets/lesson-09.png" alt="Ілюстрація до уроку: Гра «Уникай перешкод»; робота з кодом PyGame Zero в онлайн-середовищі"></section><section class="panel"><h2>🎯 Що навчимося робити</h2><div class="goal">Поєднати керування, автоматичний рух, межі екрана та умову завершення гри.</div><h2 style="margin-top:22px">Працюємо крок за кроком</h2><ol class="steps"><li>Запустіть гру й рухайте платформу стрілками ліворуч і праворуч.</li><li>Знайдіть, де перешкода змінює y та повертається нагору.</li><li>Змініть fall_speed і порівняйте складність.</li><li>Додайте рахунок за кожну перешкоду, яку вдалося оминути.</li></ol><div class="note"><b>Як перейти від сторінки до запуску коду</b><ol><li>Натисніть «Копіювати код» і скопіюйте приклад.</li><li>Відкрийте <a href="https://samel.ho.ua/" target="_blank" rel="noopener">ePython</a>, вставте код у редактор і натисніть «Виконати».</li><li>Для графічного вікна PyGame Zero та імпорту PNG відкрийте <a href="https://ed-info.github.io/pgz/" target="_blank" rel="noopener">PGZ Studio</a>. У ній є кнопки «Виконати» й «Імпорт ресурсів».</li></ol><span class="small">Код зберігається у браузері; за потреби скористайтеся кнопкою збереження у самому середовищі.</span></div></section><section class="panel"><h2>⌨️ Код для дослідження</h2><p class="small">Скопіюйте код, відкрийте середовище та змініть хоча б одне значення. Порівняйте результат.</p><div class="codebox"><div class="code-head"><span>Python · PyGame Zero</span><button class="copy" type="button">Копіювати код</button></div><pre><code>import pgzrun
+import random
+WIDTH = 600
+HEIGHT = 400
+player_x = WIDTH // 2
+obstacle_x = random.randint(20, WIDTH - 20)
+obstacle_y = -20
+score = 0
+game_over = False
+
+def update():
+    global player_x, obstacle_x, obstacle_y, score, game_over
+    if game_over: return
+    if keyboard.left: player_x = max(25, player_x - 5)
+    if keyboard.right: player_x = min(WIDTH - 25, player_x + 5)
+    obstacle_y += 4
+    if obstacle_y &gt; HEIGHT:
+        obstacle_y = -20
+        obstacle_x = random.randint(20, WIDTH - 20)
+        score += 1
+    if abs(player_x - obstacle_x) &lt; 35 and obstacle_y &gt; HEIGHT - 55:
+        game_over = True
+
+def draw():
+    screen.fill((25, 35, 60))
+    screen.draw.filled_rect(Rect((player_x-25, HEIGHT-45), (50, 20)), (70, 190, 230))
+    screen.draw.filled_circle((obstacle_x, obstacle_y), 16, (245, 90, 100))
+    screen.draw.text(&quot;Бали: &quot; + str(score), (15, 15), color=&quot;white&quot;, fontsize=28)
+    if game_over: screen.draw.text(&quot;Гру завершено&quot;, center=(WIDTH//2, HEIGHT//2), color=&quot;white&quot;, fontsize=38)
+
+pgzrun.go()</code></pre></div></section><section class="panel"><h2>🧩 Перевір себе інтерактивно</h2><div class="task"><h3>Завдання</h3><p>Перешкода не повертається нагору. Яку умову та які дві змінні перевірити?</p><button class="reveal" data-label="підказку" type="button">Показати підказку</button><div class="answer">Спочатку оновлюємо рух, потім перевіряємо події, після цього показуємо актуальний стан.</div><br><button class="reveal" data-label="відповідь" type="button">Показати відповідь</button><div class="answer">Перевірте if obstacle_y &gt; HEIGHT. Усередині умови задайте obstacle_y = -20 і нове випадкове obstacle_x.</div></div><div class="task"><h3>Розташуй кроки за порядком</h3><p class="small">Перетягніть картки або натискайте ↕, щоб змінити їхнє місце.</p><div class="sort-list"><div class="sort-item" draggable="true" data-index="1"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Оновлювати координату перешкоди</span></div><div class="sort-item" draggable="true" data-index="2"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Перевірити вихід за край і зіткнення</span></div><div class="sort-item" draggable="true" data-index="3"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Показати рахунок або завершення гри</span></div><div class="sort-item" draggable="true" data-index="0"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Рухати гравця клавішами</span></div></div><button class="button check-order" type="button" data-answer="0,1,2,3">Перевірити порядок</button><div class="feedback" aria-live="polite"></div></div></section><div class="lesson-nav"><a class="button secondary" href="lesson-08.html">← Попередній урок</a><a class="button" href="lesson-10.html">Наступний урок →</a></div></main><footer class="footer">ClassLus · Інформатика: від ідеї до проєкту</footer><script src="course.js"></script></body></html>

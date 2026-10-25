@@ -1,0 +1,25 @@
+<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Урок 8. Костюми персонажа й стани руху · PyGame Zero</title><meta name="description" content="Змінюємо вигляд героя залежно від напрямку руху: спокій, рух ліворуч і рух праворуч."><link rel="stylesheet" href="styles.css"></head><body><header><a class="brand" href="../programming.html">Class<span>Lus</span> ✦</a><nav><a href="../index.html#directions">Напрями</a><a href="../programming.html">Програмування</a><a href="https://lusbul.github.io/classlus/" target="_blank" rel="noopener">ClassLus ↗</a></nav></header><main class="wrap"><a class="crumb" href="index.html">← До курсу PyGame Zero</a><section class="lesson-head"><div><div class="badge">Урок 8 із 10 · Один герой — кілька образів</div><h1>Костюми персонажа й стани руху</h1><p class="lead">Змінюємо вигляд героя залежно від напрямку руху: спокій, рух ліворуч і рух праворуч.</p><div class="links"><a class="button" href="https://samel.ho.ua/" target="_blank" rel="noopener">Відкрити ePython ↗</a><a class="button secondary" href="https://ed-info.github.io/pgz/" target="_blank" rel="noopener">Відкрити PGZ Studio ↗</a></div></div><img src="assets/lesson-08.png" alt="Ілюстрація до уроку: Костюми персонажа й стани руху; робота з кодом PyGame Zero в онлайн-середовищі"></section><section class="panel"><h2>🎯 Що навчимося робити</h2><div class="goal">Пов’язати стан персонажа з активним зображенням-костюмом.</div><h2 style="margin-top:22px">Працюємо крок за кроком</h2><ol class="steps"><li>Імпортуйте три PNG-костюми героя: idle, left і right.</li><li>Запустіть програму та натискайте стрілки.</li><li>Знайдіть, де вибирається поточний Actor.</li><li>Додайте ще один стан, наприклад стрибок або здивування.</li></ol><div class="note"><b>Як перейти від сторінки до запуску коду</b><ol><li>Натисніть «Копіювати код» і скопіюйте приклад.</li><li>Відкрийте <a href="https://samel.ho.ua/" target="_blank" rel="noopener">ePython</a>, вставте код у редактор і натисніть «Виконати».</li><li>Для графічного вікна PyGame Zero та імпорту PNG відкрийте <a href="https://ed-info.github.io/pgz/" target="_blank" rel="noopener">PGZ Studio</a>. У ній є кнопки «Виконати» й «Імпорт ресурсів».</li></ol><span class="small">Код зберігається у браузері; за потреби скористайтеся кнопкою збереження у самому середовищі.</span></div></section><section class="panel"><h2>⌨️ Код для дослідження</h2><p class="small">Скопіюйте код, відкрийте середовище та змініть хоча б одне значення. Порівняйте результат.</p><div class="codebox"><div class="code-head"><span>Python · PyGame Zero</span><button class="copy" type="button">Копіювати код</button></div><pre><code>import pgzrun
+WIDTH = 600
+HEIGHT = 400
+hero_idle = Actor(&quot;idle&quot;)
+hero_left = Actor(&quot;left&quot;)
+hero_right = Actor(&quot;right&quot;)
+x, y = 300, 200
+current = hero_idle
+
+def update():
+    global x, current
+    current = hero_idle
+    if keyboard.left:
+        x -= 3
+        current = hero_left
+    elif keyboard.right:
+        x += 3
+        current = hero_right
+    hero_idle.pos = hero_left.pos = hero_right.pos = (x, y)
+
+def draw():
+    screen.fill((225, 240, 255))
+    current.draw()
+
+pgzrun.go()</code></pre></div></section><section class="panel"><h2>🧩 Перевір себе інтерактивно</h2><div class="task"><h3>Завдання</h3><p>Герой натиснув праворуч, але показує костюм left. Яке присвоєння слід змінити?</p><button class="reveal" data-label="підказку" type="button">Показати підказку</button><div class="answer">Координата відповідає за місце, а змінна current — за зображення героя.</div><br><button class="reveal" data-label="відповідь" type="button">Показати відповідь</button><div class="answer">У гілці keyboard.right потрібно присвоювати current = hero_right.</div></div><div class="task"><h3>Розташуй кроки за порядком</h3><p class="small">Перетягніть картки або натискайте ↕, щоб змінити їхнє місце.</p><div class="sort-list"><div class="sort-item" draggable="true" data-index="0"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Перевірити напрямок клавіші</span></div><div class="sort-item" draggable="true" data-index="1"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Змінити координату героя</span></div><div class="sort-item" draggable="true" data-index="2"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Вибрати відповідний костюм</span></div><div class="sort-item" draggable="true" data-index="3"><button type="button" aria-label="Перемістити крок угору">↕</button><span>Намалювати поточний Actor</span></div></div><button class="button check-order" type="button" data-answer="0,1,2,3">Перевірити порядок</button><div class="feedback" aria-live="polite"></div></div></section><div class="lesson-nav"><a class="button secondary" href="lesson-07.html">← Попередній урок</a><a class="button" href="lesson-09.html">Наступний урок →</a></div></main><footer class="footer">ClassLus · Інформатика: від ідеї до проєкту</footer><script src="course.js"></script></body></html>
