@@ -32,9 +32,28 @@
 const flags=['FLAG{SOURCES}','FLAG{BACKUP}','FLAG{RISK}','FLAG{KEY}','FLAG{2FA}','FLAG{INTEGRITY}'];
 const titles=['Пошук інформації','Атаки проти України','Модель загроз','Шифр і ключ','Цифрова гігієна','Хеш і підпис'];
 const solved=new Set();let current=1;
-function renderNav(){const nav=document.getElementById('routeNav');nav.innerHTML='';titles.forEach((title,i)=>{const n=i+1,b=document.createElement('button');b.className='nav-step'+(current===n?' active':'')+(solved.has(n)?' done':'');b.textContent=(solved.has(n)?'✓ ':'')+n+'. '+title;b.disabled=n>1&&!solved.has(n)&&n!==Math.max(1,...solved)+1;b.onclick=()=>go(n);nav.appendChild(b)})}
+function renderNav(){const nav=document.getElementById('routeNav');nav.innerHTML='';titles.forEach((title,i)=>{const n=i+1,b=document.createElement('button');b.className='nav-step'+(current===n?' active':'')+(solved.has(n)?' done':'');b.textContent=(solved.has(n)?'✓ ':'')+n+'. '+title;b.disabled=n>1&&!solved.has(n-1);b.onclick=()=>go(n);nav.appendChild(b)})}
 function go(n){if(n>1&&!solved.has(n-1))return;current=n;document.querySelectorAll('.stage').forEach(s=>s.classList.remove('active'));document.getElementById('stage'+n).classList.add('active');renderNav();document.getElementById('progressText').textContent='Етап '+n+' із 6 · '+solved.size+' прапорців';document.getElementById('stage'+n).scrollIntoView({behavior:'smooth',block:'start'})}
-function checkRadio(n,answer,flag){const chosen=document.querySelector('input[name="q"+n+']:checked');const f=document.getElementById('f'+n);if(!chosen){f.className='feedback bad';f.textContent='Оберіть один варіант.';return}if(chosen.value!==answer){f.className='feedback bad';f.textContent='Ще раз прочитайте пояснення й підказку.';return}if(solved.has(n))return;solved.add(n);f.className='feedback good';f.textContent='Правильно! Етап завершено.';const box=document.getElementById('flag'+n);box.innerHTML='Ваш прапорець: <span class="flag">'+flag+'</span> <button class="copy" onclick="copyFlag(\''+flag+'\',this)">Копіювати</button>';box.classList.add('show');document.getElementById('next'+n).classList.add('show');document.getElementById('progressFill').style.width=(solved.size/6*100)+'%';document.getElementById('progressText').textContent='Етап '+n+' із 6 · '+solved.size+' прапорців';renderNav()}
+function checkRadio(n,answer,flag){
+ const chosen=document.querySelector('input[name="q'+n+'"]:checked');
+ const f=document.getElementById('f'+n);
+ if(!chosen){f.className='feedback bad';f.textContent='Оберіть один варіант.';return}
+ if(chosen.value!==answer){f.className='feedback bad';f.textContent='Ще раз прочитайте пояснення й підказку.';return}
+ if(solved.has(n))return;
+ solved.add(n);
+ f.className='feedback good';f.textContent='Правильно! Етап завершено.';
+ const box=document.getElementById('flag'+n);
+ box.replaceChildren();
+ box.append('Ваш прапорець: ');
+ const flagSpan=document.createElement('span');flagSpan.className='flag';flagSpan.textContent=flag;
+ const copyButton=document.createElement('button');copyButton.className='copy';copyButton.textContent='Копіювати';copyButton.addEventListener('click',()=>copyFlag(flag,copyButton));
+ box.append(flagSpan,' ',copyButton);
+ box.classList.add('show');
+ document.getElementById('next'+n).classList.add('show');
+ document.getElementById('progressFill').style.width=(solved.size/6*100)+'%';
+ document.getElementById('progressText').textContent='Етап '+n+' із 6 · '+solved.size+' прапорців';
+ renderNav();
+}
 async function copyFlag(flag,button){try{await navigator.clipboard.writeText(flag);button.textContent='Скопійовано'}catch(e){window.prompt('Скопіюйте прапорець:',flag)}}
 function completeRoute(){document.getElementById('complete').classList.add('show');document.getElementById('allFlags').innerHTML=flags.map(f=>'<span>'+f+'</span>').join('');document.getElementById('complete').scrollIntoView({behavior:'smooth',block:'center'})}
 function resetRoute(){solved.clear();document.querySelectorAll('input[type=radio]').forEach(x=>x.checked=false);document.querySelectorAll('.flagbox').forEach(x=>{x.classList.remove('show');x.innerHTML=''});document.querySelectorAll('.feedback').forEach(x=>{x.textContent='';x.className='feedback'});document.querySelectorAll('.next').forEach(x=>x.classList.remove('show'));document.getElementById('complete').classList.remove('show');document.getElementById('progressFill').style.width='0%';current=1;go(1)}
