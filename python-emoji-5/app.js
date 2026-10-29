@@ -1,20 +1,35 @@
-const L=window.LESSON,$=s=>document.querySelector(s),key='emoji-v3-'+L.id;
-let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
-const code=$('#code');code.value=state.code??L.code;$('#student').value=state.student||'';$('#reflection').value=state.reflection||'';
-function save(){state.code=code.value;state.student=$('#student').value;state.reflection=$('#reflection').value;localStorage.setItem(key,JSON.stringify(state))}
+
+const L=window.LESSON,$=s=>document.querySelector(s),storage='python-emoji-steps-'+L.id;
+let state={};try{state=JSON.parse(localStorage.getItem(storage)||'{}')}catch(e){}
+const code=$('#code');code.value=state.code??L.code;
+$('#student').value=state.student||'';$('#reflection').value=state.reflection||'';
+function save(){state.code=code.value;state.student=$('#student').value;state.reflection=$('#reflection').value;try{localStorage.setItem(storage,JSON.stringify(state))}catch(e){}}
 [code,$('#student'),$('#reflection')].forEach(el=>el.addEventListener('input',save));
-$('#reset').onclick=()=>{code.value=L.code;save()};$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(code.value);$('#status').textContent='Код скопійовано для ePython'}catch(e){code.select();document.execCommand('copy');$('#status').textContent='Код виділено для копіювання'}};
-$('#hint').onclick=()=>$('#aiHint').hidden=!$('#aiHint').hidden;
-$('#check').onclick=()=>{let x=$('input[name=quiz]:checked');if(!x){$('#feedback').textContent='Оберіть відповідь';return}state.answer=+x.value;state.correct=state.answer===L.correct;save();$('#feedback').textContent=state.correct?'🌟 Правильно!':'🔎 Перечитайте пояснення й спробуйте ще раз'};
-if(state.answer!==undefined){let el=$(`input[name=quiz][value="${state.answer}"]`);if(el)el.checked=true}
-const a=$('#activity');function feedback(s){state.activity=s;save();$('#activityFeedback').textContent=s}
-function button(label,fn){let b=document.createElement('button');b.className='alt';b.textContent=label;b.onclick=fn;a.appendChild(b)}
-if(L.id===1){let inp=document.createElement('input');inp.placeholder='Наприклад: :-)';a.appendChild(inp);button('Показати ключ',()=>feedback('Мій ASCII-ключ: '+(inp.value||':-)')))}
-else if(L.id===6){let f=-2;let p=document.createElement('p');a.appendChild(p);const show=()=>{p.textContent='🛗 Поверх '+f;feedback('Ліфт: '+f)};button('⬆ Вгору',()=>{f=Math.min(9,f+1);show()});button('⬇ Вниз',()=>{f=Math.max(-9,f-1);show()});show()}
-else if([7,8,9,10].includes(L.id)){let inp=document.createElement('input');inp.type='range';inp.min=L.id===7?-10:0;inp.max=L.id===10?12:10;inp.value=5;a.appendChild(inp);let p=document.createElement('p');a.appendChild(p);let show=()=>{let v=+inp.value;p.textContent=L.id===7?'🌡️ '+v+' °C':L.id===8?(v>=5?'😄 Бадьорий':'😌 Спокійний'):L.id===9?(v>=8?'😄 Радісний':v>=5?'😌 Спокійний':'🤔 Задумливий'):'🎈'.repeat(v);feedback(p.textContent)};inp.oninput=show;show()}
-else if(L.id>=11){let c=document.createElement('canvas');c.width=400;c.height=240;a.appendChild(c);let g=c.getContext('2d');g.strokeStyle='#2f65b8';g.lineWidth=3;g.strokeRect(80,40,160,160);feedback('Намалював рамку: змінюватиму її кодом у Turtle')}
-else{let inp=document.createElement('input');inp.placeholder='Мій результат або пояснення';a.appendChild(inp);button('Зберегти відповідь',()=>feedback(inp.value||'Потрібно ввести відповідь'))}
-let py=null;async function load(){if(py)return py;$('#status').textContent='Завантажуємо Python…';if(!window.loadPyodide)await new Promise((resolve,reject)=>{let s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});return py}
-$('#run').onclick=async()=>{save();$('#run').disabled=true;try{if(L.id>=11){$('#output').textContent='Для повного виконання Turtle скопіюйте код у середовище з підтримкою turtle. Ескіз є в інтерактиві нижче.';return}let p=await load(),out=[];p.setStdout({batched:s=>out.push(s)});p.setStderr({batched:s=>out.push(s)});p.globals.set('ask_student',s=>prompt(s||'Введіть відповідь')||'');await p.runPythonAsync('import builtins\nbuiltins.input = ask_student');await p.runPythonAsync(code.value);$('#output').textContent=out.join('\n')||'Програму виконано';$('#status').textContent='Готово'}catch(e){$('#output').textContent=String(e);$('#status').textContent='Перевірте повідомлення про помилку'}finally{$('#run').disabled=false}};
+$('#copy').onclick=async()=>{try{await navigator.clipboard.writeText(code.value);$('#status').textContent='Код скопійовано'}catch(e){code.select();$('#status').textContent='Код виділено для копіювання'}};
+$('#verify').onclick=()=>{code.value=L.code;save();$('#modeHelp').textContent='Готовий приклад завантажено. Зараз побачиш результат.';$('#run').click()};
+$('#try').onclick=()=>{code.value=L.starter;save();$('#modeHelp').textContent='Тепер це твоя програма. Зміни текст, числа чи символи та натисни «Запустити».';$('#output').textContent='Зміни код і натисни «Запустити».';$('#turtleCanvas').hidden=true;code.focus()};
+$('#check').onclick=()=>{const x=$('input[name=quiz]:checked');if(!x){$('#feedback').textContent='Спочатку обери відповідь';return}state.answer=+x.value;state.correct=state.answer===L.correct;save();$('#feedback').textContent=state.correct?'🌟 Правильно!':'🔎 Спробуй ще раз, повернись до пояснення.'};
+if(state.answer!==undefined){const x=$('input[name=quiz][value="'+state.answer+'"]');if(x)x.checked=true}
+let py=null;async function load(){if(py)return py;$('#status').textContent='⏳ Завантажуємо Python…';if(!window.loadPyodide)await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});py=await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});return py}
+function turtlePreview(src){
+const c=$('#turtleCanvas');c.hidden=false;const g=c.getContext('2d');g.clearRect(0,0,c.width,c.height);
+let x=260,y=175,angle=0,color='royalblue',width=3;
+const commands=[],lines=src.split('\n');
+for(let i=0;i<lines.length;i++){const line=lines[i].trim(),loop=line.match(/^for\s+\w+\s+in\s+range\((\d+)\):/);
+if(loop){const block=[];while(i+1<lines.length&&/^\s+/.test(lines[i+1]))block.push(lines[++i].trim());for(let j=0;j<Math.min(+loop[1],100);j++)commands.push(...block)}else commands.push(line)}
+for(const line of commands){let m;if(m=line.match(/\.color\(['"]([^'"]+)['"]\)/))color=m[1];if(m=line.match(/\.pensize\((\d+)\)/))width=+m[1];
+if(m=line.match(/\.(right|left|forward|backward)\((-?[\d.]+)\)/)){const n=+m[2];if(m[1]==='right')angle+=n;else if(m[1]==='left')angle-=n;else{const d=n*(m[1]==='backward'?-1:1),nx=x+Math.cos(angle*Math.PI/180)*d,ny=y+Math.sin(angle*Math.PI/180)*d;g.beginPath();g.strokeStyle=color;g.lineWidth=width;g.moveTo(x,y);g.lineTo(nx,ny);g.stroke();x=nx;y=ny}}}
+$('#output').textContent='🐢 Навчальний переглядач Turtle показав базові команди цього кроку. Для повної бібліотеки Turtle скористайся відповідним середовищем.';
+}
+$('#run').onclick=async()=>{save();$('#run').disabled=true;$('#status').textContent='';try{
+if(L.id>=11){turtlePreview(code.value);$('#status').textContent='Ескіз готовий';return}
+const p=await load(),out=[];p.setStdout({batched:s=>out.push(s)});p.setStderr({batched:s=>out.push(s)});
+p.globals.set('ask_student',s=>window.prompt(s||'Введи відповідь:')??'');
+await p.runPythonAsync('import builtins\nbuiltins.input = ask_student');
+await p.runPythonAsync(code.value);
+$('#output').textContent=out.join('\n')||'Програму виконано без текстового виведення.';
+$('#status').textContent='✅ Готово';
+}catch(e){$('#output').textContent=String(e);$('#status').textContent='🔎 Прочитай повідомлення про помилку.'}finally{$('#run').disabled=false}};
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('#report').onclick=()=>{save();let w=window.open('','_blank');if(!w){alert('Дозвольте спливні вікна');return}w.document.write('<!doctype html><html lang="uk"><meta charset="utf-8"><title>Звіт</title><style>body{font:16px Arial;max-width:760px;margin:35px auto;color:#203050}pre{white-space:pre-wrap;background:#eef3ff;padding:15px}</style><h1>Python Emoji — місія '+L.id+'</h1><h2>'+esc(L.title)+'</h2><p>Учень: '+esc(state.student)+'</p><h3>Мій код</h3><pre>'+esc(state.code)+'</pre><h3>Інтерактив</h3><p>'+esc(state.activity||'Не виконано')+'</p><h3>Перевірка</h3><p>'+esc(state.answer===undefined?'Не виконано':L.options[state.answer])+'</p><h3>Мій висновок</h3><p>'+esc(state.reflection)+'</p><script>window.onload=()=>window.print()<\/script></html>');w.document.close()};
+$('#report').onclick=()=>{save();const w=window.open('','_blank');if(!w){alert('Дозволь відкривати вікно для звіту.');return}
+w.document.write('<!doctype html><html lang="uk"><meta charset="utf-8"><title>Звіт</title><style>body{font:16px Arial;max-width:760px;margin:35px auto;color:#203050}pre{white-space:pre-wrap;background:#eef3ff;padding:15px}</style><h1>Python Emoji — крок '+L.id+'</h1><h2>'+esc(L.title)+'</h2><p>Автор: '+esc(state.student)+'</p><h3>Мій код</h3><pre>'+esc(state.code)+'</pre><h3>Перевір себе</h3><p>'+esc(state.answer===undefined?'Ще не виконано':L.options[state.answer])+'</p><h3>Мій висновок</h3><p>'+esc(state.reflection)+'</p><script>window.onload=()=>window.print()<\/script></html>');w.document.close()};
