@@ -1,11 +1,6 @@
-ClassLus / Бази даних — 5 уроків
-
-Завантажте папку bazy-danykh у КОРІНЬ репозиторію classlus, поруч із workshops.html.
-Головна сторінка: bazy-danykh/index.html
-Урок 1: bazy-danykh/urok1/index.html
-Урок 2: bazy-danykh/urok2/index.html
-Для уроків 3–5 зарезервовані картки «Незабаром»; нові папки додамо пізніше.
-У workshops.html посилання має бути bazy-danykh/index.html.
-Не завантажуйте окремі файли з уроків у корінь репозиторію.
-
-Версія 2: додані інтерактивні сценарії та посилання на статтю Григорія Громка про dat.A.
+ClassLus / bazy-danykh
+Готові уроки 1, 2, 3. Уроки 4 і 5 — незабаром.
+Завантажте папку bazy-danykh у корінь репозиторію classlus.
+Відкрийте bazy-danykh/index.html.
+Урок 3: bazy-danykh/urok3/index.html
+Уроки 1 і 2 збережені без змін.
