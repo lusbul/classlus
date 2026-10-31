@@ -1,4 +1,5 @@
-<!doctype html><html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Python для MilTech — вебпідручник</title><style>:root{font-family:system-ui,Arial,sans-serif;color:#e9f1ff;background:#08172b;scroll-behavior:smooth}*{box-sizing:border-box}body{margin:0}header{padding:24px max(22px,calc((100vw - 1200px)/2));background:#102847;display:flex;justify-content:space-between;align-items:center;gap:12px}header b{font-size:21px}header a,.toolbar a{color:#fff;text-decoration:none}main{max-width:1200px;margin:auto;display:grid;grid-template-columns:220px 1fr;gap:26px;padding:24px}nav{position:sticky;top:12px;align-self:start;display:grid;gap:6px}nav a{padding:10px;border-radius:10px;color:#bcd4f3;text-decoration:none}nav a:hover{background:#20476d;color:white}nav span{color:#ffcf52;margin-right:10px}article{min-width:0}.hero{background:#12345b;border:1px solid #2c5279;border-radius:20px;overflow:hidden}.hero .intro{padding:24px;display:flex;align-items:center;gap:22px}.hero .intro-text{flex:1;min-width:0}.hero .hero-thumb{width:190px;max-width:30%;height:auto;max-height:145px;object-fit:contain;flex-shrink:0;border-radius:12px}.hero h1{font-size:clamp(28px,4vw,46px);margin:0}.hero p{line-height:1.7;color:#c7d9ee}.lesson{margin-top:20px;background:#112743;border:1px solid #29496a;border-radius:18px;padding:24px;scroll-margin-top:12px}.eyebrow{font-size:12px;letter-spacing:1px;color:#ffcf52;font-weight:700}h2{margin:9px 0;font-size:27px}.task{line-height:1.65}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.toolbar button,.toolbar a{background:#2469bc;color:white;border:0;padding:11px 15px;border-radius:10px;cursor:pointer;font:inherit}.toolbar button:hover,.toolbar a:hover{background:#3987e7}pre{background:#06111e;border:1px solid #36516b;border-radius:12px;padding:17px;overflow:auto;white-space:pre;font-size:13px;line-height:1.6;color:#c5f4e2}details{margin-top:15px;background:#173955;border-radius:10px;padding:14px}summary{cursor:pointer;font-weight:700;color:#ffda72}details p{line-height:1.6}.final{border-color:#b89442;background:#2a2d35}.note{color:#f9d77b}.foot{padding:30px;color:#a7bdd6;text-align:center}@media(max-width:760px){.hero .intro{gap:12px;padding:16px}.hero .hero-thumb{width:110px;max-width:30%;max-height:105px}main{display:block;padding:12px}nav{position:static;display:flex;overflow:auto;margin-bottom:15px}nav a{white-space:nowrap;background:#173955}header{padding:16px}.lesson{padding:15px}pre{font-size:12px}}</style></head><body><header><b>🐍 Python для <span style="color:#ffcf52">MilTech</span></b><a href="#project">Підсумковий проєкт ↓</a></header><main><nav><a href="#lesson1"><span>01</span>OpenCV</a><a href="#lesson2"><span>02</span>Ultralytics YOLO</a><a href="#lesson3"><span>03</span>PyTorch</a><a href="#lesson4"><span>04</span>NumPy</a><a href="#lesson5"><span>05</span>Matplotlib</a><a href="#lesson6"><span>06</span>SimPy</a><a href="#lesson7"><span>07</span>NetworkX</a><a href="#lesson8"><span>08</span>OSMnx</a><a href="#lesson9"><span>09</span>Rasterio</a><a href="#lesson10"><span>10</span>SciPy</a><a href="#project">★ Проєкт</a></nav><article><div class="hero"><div class="intro"><div class="intro-text"><h1>Від коду до корисного продукту</h1><p>Практичний інтерактивний вебпідручник: 10 бібліотек Python, 10 мініпродуктів, готові клітинки для Google Colab і власний підсумковий проєкт. Приклади зосереджені на захисті цивільних, рятуванні, гуманітарній логістиці й технічній діагностиці. Жодних реальних військових координат, наведення чи бойового керування.</p><p><strong>Як працювати:</strong> відкрийте розділ, скопіюйте код, вставте в нову клітинку Google Colab, запустіть і змініть параметри. Усі дані навчальні або публічні.</p></div><img class="hero-thumb" src="../assets/miltech-tech.png" alt="Ілюстрація Python, робототехніки та цифрових карт"></div></div><section class="lesson" id="lesson1"><div class="eyebrow">ПРОДУКТ 01 · Аналіз зображень</div><h2>OpenCV</h2><p class="task">Огляд пошкоджень інфраструктури за фотографіями</p><div class="toolbar"><button onclick="copyCode(1)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code1"><code>import cv2
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><title>Python для MilTech — вебпідручник</title><style>:root{font-family:system-ui,Arial,sans-serif;color:#e9f1ff;background:#08172b;scroll-behavior:smooth}*{box-sizing:border-box}body{margin:0}header{padding:24px max(22px,calc((100vw - 1200px)/2));background:#102847;display:flex;justify-content:space-between;align-items:center;gap:12px}header b{font-size:21px}header a,.toolbar a{color:#fff;text-decoration:none}main{max-width:1200px;margin:auto;display:grid;grid-template-columns:220px 1fr;gap:26px;padding:24px}nav{position:sticky;top:12px;align-self:start;display:grid;gap:6px}nav a{padding:10px;border-radius:10px;color:#bcd4f3;text-decoration:none}nav a:hover{background:#20476d;color:white}nav span{color:#ffcf52;margin-right:10px}article{min-width:0}.hero{background:#12345b;border:1px solid #2c5279;border-radius:20px;overflow:hidden}.hero .intro{padding:24px;display:flex;align-items:center;gap:22px}.hero .intro-text{flex:1;min-width:0}.hero .hero-thumb{width:570px;max-width:48%;height:auto;max-height:435px;object-fit:contain;flex-shrink:0;border-radius:12px}.hero h1{font-size:clamp(28px,4vw,46px);margin:0}.hero p{line-height:1.7;color:#c7d9ee}.lesson{margin-top:20px;background:#112743;border:1px solid #29496a;border-radius:18px;padding:24px;scroll-margin-top:12px}.eyebrow{font-size:12px;letter-spacing:1px;color:#ffcf52;font-weight:700}h2{margin:9px 0;font-size:27px}.task{line-height:1.65}.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.toolbar button,.toolbar a{background:#2469bc;color:white;border:0;padding:11px 15px;border-radius:10px;cursor:pointer;font:inherit}.toolbar button:hover,.toolbar a:hover{background:#3987e7}pre{background:#06111e;border:1px solid #36516b;border-radius:12px;padding:17px;overflow:auto;white-space:pre;font-size:13px;line-height:1.6;color:#c5f4e2}details{margin-top:15px;background:#173955;border-radius:10px;padding:14px}summary{cursor:pointer;font-weight:700;color:#ffda72}details p{line-height:1.6}.final{border-color:#b89442;background:#2a2d35}.note{color:#f9d77b}.foot{padding:30px;color:#a7bdd6;text-align:center}@media(max-width:760px){.hero .intro{gap:12px;padding:16px}.hero .hero-thumb{width:240px;max-width:45%;max-height:240px}main{display:block;padding:12px}nav{position:static;display:flex;overflow:auto;margin-bottom:15px}nav a{white-space:nowrap;background:#173955}header{padding:16px}.lesson{padding:15px}pre{font-size:12px}}</style></head><body><header><b>🐍 Python для <span style="color:#ffcf52">MilTech</span></b><a href="#project">Підсумковий проєкт ↓</a></header><main><nav><a href="#lesson1"><span>01</span>OpenCV</a><a href="#lesson2"><span>02</span>Ultralytics YOLO</a><a href="#lesson3"><span>03</span>PyTorch</a><a href="#lesson4"><span>04</span>NumPy</a><a href="#lesson5"><span>05</span>Matplotlib</a><a href="#lesson6"><span>06</span>SimPy</a><a href="#lesson7"><span>07</span>NetworkX</a><a href="#lesson8"><span>08</span>OSMnx</a><a href="#lesson9"><span>09</span>Rasterio</a><a href="#lesson10"><span>10</span>SciPy</a><a href="#project">★ Проєкт</a></nav><article><div class="hero"><div class="intro"><div class="intro-text"><h1>Від коду до корисного продукту</h1><p>Практичний інтерактивний вебпідручник: 10 бібліотек Python, 10 мініпродуктів, готові клітинки для Google Colab і власний підсумковий проєкт. Приклади зосереджені на захисті цивільних, рятуванні, гуманітарній логістиці й технічній діагностиці. Жодних реальних військових координат, наведення чи бойового керування.</p><p><strong>Як працювати:</strong> відкрийте розділ, скопіюйте код, вставте в нову клітинку Google Colab, запустіть і змініть параметри. Усі дані навчальні або публічні.</p></div><img alt="Ілюстрація Python, робототехніки та цифрових карт" class="hero-thumb" src="../assets/miltech-tech.png"/></div></div><section class="lesson" id="lesson1"><div class="eyebrow">ПРОДУКТ 01 · Аналіз зображень</div><h2>OpenCV</h2><p class="task">Огляд пошкоджень інфраструктури за фотографіями</p><div class="toolbar"><button onclick="copyCode(1)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code1"><code>import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 img=np.zeros((240,360,3),dtype=np.uint8)
@@ -6,16 +7,16 @@ cv2.rectangle(img,(40,60),(310,190),(255,255,255),-1)
 cv2.line(img,(70,80),(270,170),(0,0,0),5)
 gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 edges=cv2.Canny(gray,70,140)
-plt.imshow(edges,cmap=&quot;gray&quot;);plt.axis(&quot;off&quot;);plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть пороги Canny та товщину лінії. Чи всі контури однаково помітні?</p></details></section><section class="lesson" id="lesson2"><div class="eyebrow">ПРОДУКТ 02 · Комп’ютерний зір</div><h2>Ultralytics YOLO</h2><p class="task">Підрахунок транспортних засобів на навчальному фото для планування евакуації</p><div class="toolbar"><button onclick="copyCode(2)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code2"><code>%pip -q install ultralytics
+plt.imshow(edges,cmap="gray");plt.axis("off");plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть пороги Canny та товщину лінії. Чи всі контури однаково помітні?</p></details></section><section class="lesson" id="lesson2"><div class="eyebrow">ПРОДУКТ 02 · Комп’ютерний зір</div><h2>Ultralytics YOLO</h2><p class="task">Підрахунок транспортних засобів на навчальному фото для планування евакуації</p><div class="toolbar"><button onclick="copyCode(2)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code2"><code>%pip -q install ultralytics
 from ultralytics import YOLO
 from PIL import Image
 from IPython.display import display
-model=YOLO(&quot;yolo11n.pt&quot;)
+model=YOLO("yolo11n.pt")
 # Публічне демонстраційне фото, не оперативні дані
-url=&quot;https://ultralytics.com/images/bus.jpg&quot;
+url="https://ultralytics.com/images/bus.jpg"
 results=model.predict(source=url,conf=0.35,verbose=False)
 display(Image.fromarray(results[0].plot()[...,::-1]))
-print(&quot;Виявлено об’єктів:&quot;,len(results[0].boxes))</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть поріг conf. Порівняйте кількість виявлень; перевірте помилкові спрацювання.</p></details></section><section class="lesson" id="lesson3"><div class="eyebrow">ПРОДУКТ 03 · Машинне навчання</div><h2>PyTorch</h2><p class="task">Навчальна модель оцінки потреби в запасах гуманітарної допомоги</p><div class="toolbar"><button onclick="copyCode(3)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code3"><code>import torch
+print("Виявлено об’єктів:",len(results[0].boxes))</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть поріг conf. Порівняйте кількість виявлень; перевірте помилкові спрацювання.</p></details></section><section class="lesson" id="lesson3"><div class="eyebrow">ПРОДУКТ 03 · Машинне навчання</div><h2>PyTorch</h2><p class="task">Навчальна модель оцінки потреби в запасах гуманітарної допомоги</p><div class="toolbar"><button onclick="copyCode(3)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code3"><code>import torch
 torch.manual_seed(4)
 x=torch.tensor([[1.],[2.],[3.],[4.],[5.]])
 y=2*x+1
@@ -25,81 +26,133 @@ for epoch in range(500):
     opt.zero_grad()
     loss=((model(x)-y)**2).mean()
     loss.backward();opt.step()
-print(&quot;Прогноз для 6 умовних пунктів:&quot;,model(torch.tensor([[6.]])).item())</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть залежність y, кількість епох та навчальну швидкість. Поясніть різницю між прогнозом і фактом.</p></details></section><section class="lesson" id="lesson4"><div class="eyebrow">ПРОДУКТ 04 · Чисельні моделі</div><h2>NumPy</h2><p class="task">Оцінювання автономності рятувального робота за синтетичними показниками батареї</p><div class="toolbar"><button onclick="copyCode(4)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code4"><code>import numpy as np
+print("Прогноз для 6 умовних пунктів:",model(torch.tensor([[6.]])).item())</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть залежність y, кількість епох та навчальну швидкість. Поясніть різницю між прогнозом і фактом.</p></details></section><section class="lesson" id="lesson4"><div class="eyebrow">ПРОДУКТ 04 · Чисельні моделі</div><h2>NumPy</h2><p class="task">Оцінювання автономності рятувального робота за синтетичними показниками батареї</p><div class="toolbar"><button onclick="copyCode(4)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code4"><code>import numpy as np
 t=np.arange(0,61,5)
 charge=np.maximum(0,100-1.2*t)
 for minute,pct in zip(t,charge):
-    print(f&quot;{minute:2d} хв: {pct:5.1f}%&quot;)
-print(&quot;Мінімальний заряд:&quot;,charge.min())</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть темп витрати енергії та крок часу. Які припущення моделі нереалістичні?</p></details></section><section class="lesson" id="lesson5"><div class="eyebrow">ПРОДУКТ 05 · Візуалізація</div><h2>Matplotlib</h2><p class="task">Графік навантаження на тимчасовий пункт допомоги</p><div class="toolbar"><button onclick="copyCode(5)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code5"><code>import numpy as np
+    print(f"{minute:2d} хв: {pct:5.1f}%")
+print("Мінімальний заряд:",charge.min())</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть темп витрати енергії та крок часу. Які припущення моделі нереалістичні?</p></details></section><section class="lesson" id="lesson5"><div class="eyebrow">ПРОДУКТ 05 · Візуалізація</div><h2>Matplotlib</h2><p class="task">Графік навантаження на тимчасовий пункт допомоги</p><div class="toolbar"><button onclick="copyCode(5)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code5"><code>import numpy as np
 import matplotlib.pyplot as plt
 h=np.arange(8,19)
 visitors=np.array([3,5,8,12,15,13,10,8,7,4,2])
-plt.plot(h,visitors,marker=&quot;o&quot;)
-plt.xlabel(&quot;Година&quot;);plt.ylabel(&quot;Кількість звернень&quot;)
-plt.title(&quot;Навчальна модель пункту допомоги&quot;)
-plt.grid(True);plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Побудуйте стовпчикову діаграму; визначте години пікового навантаження.</p></details></section><section class="lesson" id="lesson6"><div class="eyebrow">ПРОДУКТ 06 · Імітація процесів</div><h2>SimPy</h2><p class="task">Черга на видачу гуманітарних наборів</p><div class="toolbar"><button onclick="copyCode(6)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code6"><code>%pip -q install simpy
+plt.plot(h,visitors,marker="o")
+plt.xlabel("Година");plt.ylabel("Кількість звернень")
+plt.title("Навчальна модель пункту допомоги")
+plt.grid(True);plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Побудуйте стовпчикову діаграму; визначте години пікового навантаження.</p></details></section><section class="lesson" id="lesson6"><div class="eyebrow">ПРОДУКТ 06 · Імітація процесів</div><h2>SimPy</h2><p class="task">Симулятор автономної роботизованої станції: черга роботів на заряджання та технічну діагностику. Результат — час очікування й завантаженість станції.</p><div class="toolbar"><button onclick="copyCode(6)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code6"><code>%pip -q install simpy
 import simpy
-def visitor(env,desk,i):
-    arrival=env.now
-    with desk.request() as req:
-        yield req
-        print(f&quot;Відвідувач {i}: очікування {env.now-arrival} хв&quot;)
-        yield env.timeout(3)
-def arrivals(env,desk):
-    for i in range(8):
-        env.process(visitor(env,desk,i))
-        yield env.timeout(2)
-env=simpy.Environment()
-desk=simpy.Resource(env,capacity=1)
-env.process(arrivals(env,desk));env.run()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть capacity з 1 на 2. Чи зменшиться час очікування?</p></details></section><section class="lesson" id="lesson7"><div class="eyebrow">ПРОДУКТ 07 · Графи та мережі</div><h2>NetworkX</h2><p class="task">Пошук доступного маршруту між пунктами цивільної допомоги на вигаданій схемі</p><div class="toolbar"><button onclick="copyCode(7)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code7"><code>import networkx as nx
 import matplotlib.pyplot as plt
-G=nx.Graph()
-G.add_weighted_edges_from([(&quot;A&quot;,&quot;B&quot;,4),(&quot;A&quot;,&quot;C&quot;,3),(&quot;B&quot;,&quot;D&quot;,5),(&quot;C&quot;,&quot;D&quot;,2),(&quot;D&quot;,&quot;E&quot;,4)])
-path=nx.shortest_path(G,&quot;A&quot;,&quot;E&quot;,weight=&quot;weight&quot;)
-print(&quot;Маршрут:&quot;,&quot; → &quot;.join(path))
-print(&quot;Умовна довжина:&quot;,nx.shortest_path_length(G,&quot;A&quot;,&quot;E&quot;,weight=&quot;weight&quot;))
-nx.draw(G,with_labels=True,node_color=&quot;#a7d8ff&quot;,node_size=900)
-plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Приберіть одне ребро або змініть його вагу. Як зміниться маршрут?</p></details></section><section class="lesson" id="lesson8"><div class="eyebrow">ПРОДУКТ 08 · Відкриті карти</div><h2>OSMnx</h2><p class="task">Навчальне дослідження пішохідної мережі парку без побудови оперативних маршрутів</p><div class="toolbar"><button onclick="copyCode(8)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code8"><code>%pip -q install osmnx
+
+WAIT = []
+
+def robot(env, station, number, charge_time=6):
+    arrived = env.now
+    with station.request() as request:
+        yield request
+        wait = env.now - arrived
+        WAIT.append(wait)
+        print(f"Робот {number}: чекав {wait:.1f} хв")
+        yield env.timeout(charge_time)
+        print(f"Робот {number}: діагностика і заряджання завершені")
+
+def arrivals(env, station, count=10, interval=3):
+    for number in range(1, count + 1):
+        env.process(robot(env, station, number))
+        yield env.timeout(interval)
+
+env = simpy.Environment()
+station = simpy.Resource(env, capacity=1)
+env.process(arrivals(env, station))
+env.run()
+
+print(f"Середній час очікування: {sum(WAIT)/len(WAIT):.1f} хв")
+plt.bar(range(1, len(WAIT)+1), WAIT)
+plt.xlabel("Номер робота")
+plt.ylabel("Очікування, хв")
+plt.title("Черга роботів на станції")
+plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть кількість зарядних портів (<code>capacity</code>) з 1 на 2 або 3, інтервал прибуття (<code>interval</code>) і час обслуговування (<code>charge_time</code>). Порівняйте середній час очікування та графіки. Подумайте, як організувати технічне обслуговування, щоб роботи не простоювали.</p></details></section><section class="lesson" id="lesson7"><div class="eyebrow">ПРОДУКТ 07 · Графи та мережі</div><h2>NetworkX</h2><p class="task">Побудуйте схему зв’язку між модулями роботизованої станції. Знайдіть критичний вузол: якщо він вийде з ладу, частина модулів втратить зв’язок.</p><div class="toolbar"><button onclick="copyCode(7)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code7"><code>import networkx as nx
+import matplotlib.pyplot as plt
+G = nx.Graph()
+G.add_edges_from([
+    ("Сервер", "Шлюз"), ("Шлюз", "Зарядка"),
+    ("Шлюз", "Діагностика"), ("Діагностика", "Сенсор"),
+    ("Сервер", "Монітор")
+])
+critical = list(nx.articulation_points(G))
+print("Критичні вузли:", ", ".join(critical))
+pos = nx.spring_layout(G, seed=4)
+colors = ["#ffb86b" if n in critical else "#a7d8ff" for n in G]
+nx.draw(G, pos, with_labels=True, node_color=colors,
+        node_size=2200, font_size=9)
+plt.title("Мережа станції: помаранчеві — критичні вузли")
+plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Додайте резервний зв’язок між зарядкою та сервером. Чи змінився перелік критичних вузлів? Чим відрізняється зв’язність від швидкості передачі даних?</p></details></section><section class="lesson" id="lesson8"><div class="eyebrow">ПРОДУКТ 08 · Цифрові карти</div><h2>OSMnx</h2><p class="task">Побудуйте цифрову модель пішохідної мережі відкритого міського парку. Визначте кількість перехресть і дослідіть, як карта перетворюється на граф.</p><div class="toolbar"><button onclick="copyCode(8)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code8"><code>%pip -q install osmnx
 import osmnx as ox
-# Невелика відкрита територія для навчання
-G=ox.graph_from_place(&quot;Hyde Park, London, UK&quot;,network_type=&quot;walk&quot;)
-print(&quot;Вузлів:&quot;,len(G.nodes),&quot;ребер:&quot;,len(G.edges))
-fig,ax=ox.plot_graph(G,node_size=0,edge_color=&quot;#2877a8&quot;,show=False,close=False)
-fig.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Порівняйте кількість вузлів і ребер. Як масштаб території впливає на складність мережі?</p></details></section><section class="lesson" id="lesson9"><div class="eyebrow">ПРОДУКТ 09 · Растрові геодані</div><h2>Rasterio</h2><p class="task">Створення синтетичної карти висот для оцінювання доступності місцевості</p><div class="toolbar"><button onclick="copyCode(9)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code9"><code>%pip -q install rasterio
+import matplotlib.pyplot as plt
+# Публічна навчальна територія, без оперативних маршрутів
+G = ox.graph_from_place("Hyde Park, London, UK", network_type="walk")
+streets = ox.stats.count_streets_per_node(G)
+intersections = sum(count &gt;= 3 for count in streets.values())
+print("Вузлів мережі:", len(G.nodes))
+print("Ділянок:", len(G.edges))
+print("Вузлів із 3+ підходами:", intersections)
+fig, ax = ox.plot_graph(G, node_size=0, edge_color="#2877a8",
+                        bgcolor="white", show=False, close=False)
+ax.set_title("Пішохідна мережа парку")
+plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Знайдіть на схемі густі й розріджені ділянки мережі. Чому вузол графа не завжди є реальним перехрестям? Порівняйте граф із паперовою картою.</p></details></section><section class="lesson" id="lesson9"><div class="eyebrow">ПРОДУКТ 09 · Теплові карти</div><h2>Rasterio</h2><p class="task">Створіть синтетичну теплову карту корпусу зарядної станції, збережіть її як GeoTIFF і виділіть ділянки з підвищеною температурою.</p><div class="toolbar"><button onclick="copyCode(9)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code9"><code>%pip -q install rasterio
 import numpy as np
 import rasterio
 from rasterio.transform import from_origin
 import matplotlib.pyplot as plt
-y,x=np.mgrid[0:100,0:100]
-elevation=(50+20*np.sin(x/12)+15*np.cos(y/15)).astype(&quot;float32&quot;)
-with rasterio.open(&quot;terrain_demo.tif&quot;,&quot;w&quot;,driver=&quot;GTiff&quot;,height=100,width=100,count=1,dtype=&quot;float32&quot;,crs=&quot;EPSG:3857&quot;,transform=from_origin(0,100,1,1)) as dst:
-    dst.write(elevation,1)
-with rasterio.open(&quot;terrain_demo.tif&quot;) as src:
-    data=src.read(1)
-plt.imshow(data,cmap=&quot;terrain&quot;);plt.colorbar(label=&quot;Умовна висота&quot;);plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть амплітуду рельєфу. Чому синтетичну карту не можна вважати реальною?</p></details></section><section class="lesson" id="lesson10"><div class="eyebrow">ПРОДУКТ 10 · Сигнали та статистика</div><h2>SciPy</h2><p class="task">Очищення синтетичного сигналу датчика стану обладнання</p><div class="toolbar"><button onclick="copyCode(10)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" target="_blank" rel="noopener">Відкрити Google Colab ↗</a></div><pre id="code10"><code>import numpy as np
+y, x = np.mgrid[0:100, 0:100]
+temp = (28 + 16*np.exp(-((x-65)**2+(y-45)**2)/250)
+        + 2*np.sin(x/12)).astype("float32")
+with rasterio.open("thermal_demo.tif", "w", driver="GTiff",
+    height=100, width=100, count=1, dtype="float32",
+    crs="EPSG:3857", transform=from_origin(0, 100, 1, 1)) as dst:
+    dst.write(temp, 1)
+with rasterio.open("thermal_demo.tif") as src:
+    data = src.read(1)
+threshold = 38
+print("Комірок вище порогу:", int((data &gt; threshold).sum()))
+plt.imshow(data, cmap="inferno")
+plt.contour(data &gt; threshold, levels=[0.5], colors="cyan")
+plt.colorbar(label="Умовна температура, °C")
+plt.title("Синтетична теплова карта станції")
+plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть поріг 38 °C на 35 °C і 40 °C. Як зміниться площа виділеної зони? Чому синтетичні дані не можуть замінити вимірювання датчиком?</p></details></section><section class="lesson" id="lesson10"><div class="eyebrow">ПРОДУКТ 10 · Діагностика сигналів</div><h2>SciPy</h2><p class="task">Проаналізуйте синтетичні вимірювання вібрації електродвигуна. Згладьте шум і знайдіть піки, які можуть потребувати додаткової перевірки.</p><div class="toolbar"><button onclick="copyCode(10)">Копіювати код</button><a href="https://colab.research.google.com/#create=true" rel="noopener" target="_blank">Відкрити Google Colab ↗</a></div><pre id="code10"><code>import numpy as np
 import matplotlib.pyplot as plt
-from scipy.signal import savgol_filter
-rng=np.random.default_rng(2)
-t=np.linspace(0,10,200)
-signal=np.sin(t)+rng.normal(0,0.3,len(t))
-filtered=savgol_filter(signal,21,3)
-plt.plot(t,signal,alpha=.4,label=&quot;Сирий сигнал&quot;)
-plt.plot(t,filtered,label=&quot;Після фільтра&quot;)
-plt.legend();plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть довжину вікна фільтра. Які важливі зміни сигналу можуть загубитися?</p></details></section><section class="lesson final" id="project"><div class="eyebrow">ПІДСУМКОВИЙ ПРОЄКТ</div><h2>Цифровий центр допомоги</h2><p>Створіть у Google Colab невелику систему для планування роботи цивільного пункту допомоги. Вона оцінює кількість відвідувачів, моделює чергу та показує графік навантаження. Розширення: використайте NetworkX для вигаданої мережі пунктів і SciPy для аналізу синтетичних сигналів обладнання.</p><div class="toolbar"><button onclick="copyCode(99)">Копіювати код проєкту</button><a href="https://colab.research.google.com/#create=true" target="_blank">Відкрити Colab ↗</a></div><pre id="code99"><code>import numpy as np
+from scipy.signal import savgol_filter, find_peaks
+rng = np.random.default_rng(2)
+t = np.linspace(0, 20, 400)
+signal = 0.25*np.sin(3*t) + rng.normal(0, 0.13, len(t))
+signal += 1.5*np.exp(-((t-8)/0.3)**2)
+signal += 1.2*np.exp(-((t-15)/0.4)**2)
+filtered = savgol_filter(signal, 21, 3)
+peaks, _ = find_peaks(filtered, height=0.6, distance=35)
+print("Виявлено піків:", len(peaks))
+plt.plot(t, signal, alpha=.35, label="Вимірювання")
+plt.plot(t, filtered, label="Згладжений сигнал")
+plt.scatter(t[peaks], filtered[peaks], color="red", label="Піки")
+plt.xlabel("Час, с")
+plt.legend()
+plt.show()</code></pre><details><summary>Що перевірити самостійно?</summary><p>Змініть поріг height=0.6 та розмір вікна згладжування. Коли алгоритм пропускає пік або знаходить зайвий? Чому пік ще не доводить несправність?</p></details></section><section class="lesson final" id="project"><div class="eyebrow">ПІДСУМКОВИЙ ПРОЄКТ</div><h2>Розумна роботизована станція</h2><p>Створіть цифровий пульт навчальної станції: змоделюйте чергу роботів на заряджання, покажіть навантаження та оцініть, чи вистачає зарядних портів. Для розширення додайте мережу модулів (NetworkX), теплову карту (Rasterio) і контроль вібрацій (SciPy). Усі дані синтетичні.</p><div class="toolbar"><button onclick="copyCode(99)">Копіювати код проєкту</button><a href="https://colab.research.google.com/#create=true" target="_blank">Відкрити Colab ↗</a></div><pre id="code99"><code>import numpy as np
 import matplotlib.pyplot as plt
-hours=np.arange(9,18)
-arrivals=np.array([4,7,12,15,13,11,9,6,3])
-capacity=10
-queue=[]
-waiting=0
-for count in arrivals:
-    waiting=max(0,waiting+count-capacity)
+# Навчальна модель: роботи прибувають щогодини
+hours = np.arange(9, 18)
+robots = np.array([2, 4, 7, 8, 6, 5, 9, 4, 2])
+ports = 2
+service_per_port = 3  # умовних заряджань за годину
+capacity = ports * service_per_port
+queue, waiting = [], 0
+for count in robots:
+    waiting = max(0, waiting + count - capacity)
     queue.append(waiting)
-fig,ax=plt.subplots(1,2,figsize=(11,4))
-ax[0].bar(hours,arrivals,label="Звернення")
-ax[0].axhline(capacity,color="red",linestyle="--",label="Пропускна здатність")
-ax[0].legend();ax[0].set_title("Навантаження")
-ax[1].plot(hours,queue,marker="o")
-ax[1].set_title("Орієнтовна черга")
+fig, ax = plt.subplots(1, 2, figsize=(11, 4))
+ax[0].bar(hours, robots, label="Роботи на заряджання")
+ax[0].axhline(capacity, color="red", linestyle="--", label="Потужність")
+ax[0].set_title("Навантаження зарядної станції")
+ax[0].legend()
+ax[1].plot(hours, queue, marker="o")
+ax[1].set_title("Черга роботів")
+ax[1].set_xlabel("Година")
+plt.tight_layout()
 plt.show()
-print("Максимальна черга:",max(queue))</code></pre><details open><summary>Ідеї для самостійного вдосконалення</summary><p>Додайте регулятор пропускної здатності; порівняйте 2 сценарії; визначте години перевантаження; створіть коротку рекомендацію для координатора. Поясніть, чому модель не враховує індивідуальний час обслуговування.</p></details><p class="note">Важливо: не завантажуйте в публічний Colab чутливі фото, реальні координати, персональні дані чи непублічну інформацію про військові об’єкти.</p></section></article></main><div class="foot">Навчальний проєкт · Google Colab · Python · адаптивна сторінка для GitHub Pages</div><script>async function copyCode(id){let el=document.getElementById('code'+id);try{await navigator.clipboard.writeText(el.innerText);alert('Код скопійовано')}catch(e){let r=document.createRange();r.selectNodeContents(el);let s=window.getSelection();s.removeAllRanges();s.addRange(r);alert('Виділіть і скопіюйте код')}} </script></body></html>
+print("Максимальна черга:", max(queue))</code></pre><details open=""><summary>Ідеї для самостійного вдосконалення</summary><p>Змініть кількість зарядних портів із 2 до 3; порівняйте графіки. Додайте ще одну годину пікового навантаження. Визначте, які дані потрібні для реалістичнішої моделі: ємність батареї, час заряджання, пріоритет обслуговування. Поясніть, чому ця спрощена модель не враховує індивідуальний час заряджання.</p></details><p class="note">Важливо: не завантажуйте в публічний Colab чутливі фото, реальні координати, персональні дані чи непублічну інформацію про військові об’єкти.</p></section></article></main><div class="foot">Навчальний проєкт · Google Colab · Python · адаптивна сторінка для GitHub Pages</div><script>async function copyCode(id){let el=document.getElementById('code'+id);try{await navigator.clipboard.writeText(el.innerText);alert('Код скопійовано')}catch(e){let r=document.createRange();r.selectNodeContents(el);let s=window.getSelection();s.removeAllRanges();s.addRange(r);alert('Виділіть і скопіюйте код')}} </script></body></html>
