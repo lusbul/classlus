@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Таємниця крапель — STEM-урок, 7 клас</title>
+<style>
+:root{--ink:#19334b;--blue:#126caa;--sky:#eaf7ff;--gold:#ffcc58;--line:#d6e5ef}*{box-sizing:border-box}
+body{margin:0;background:#f7fbfe;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1050px;margin:auto;padding:18px}header{background:linear-gradient(115deg,#12395c,#177db3);color:white;padding:32px 20px;border-radius:22px}h1{font-size:clamp(28px,5vw,46px);line-height:1.15;margin:8px 0}h2{font-size:clamp(22px,3.5vw,30px);margin:0 0 12px}h3{margin:0 0 8px}.lead{font-size:19px;max-width:750px}.tag{display:inline-block;background:#fff3c9;color:#654500;padding:4px 12px;border-radius:99px;font-weight:750}
+section{margin:22px 0;padding:clamp(16px,3vw,28px);background:white;border:1px solid var(--line);border-radius:20px;box-shadow:0 4px 18px #1743660b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}.tile{border:1px solid var(--line);border-radius:15px;padding:16px;background:#fbfdff}
+.scene{height:145px;border-radius:12px;overflow:hidden;margin-bottom:12px;background:#dff1fb}.scene svg{width:100%;height:100%}
+button,.btn{border:1px solid #b7d5e9;background:#eef7ff;color:#123f60;padding:11px 14px;border-radius:11px;font:inherit;font-weight:650;cursor:pointer;min-height:44px}
+button:hover{background:#dcefff}button.selected{background:#126caa;color:white;border-color:#126caa}.primary{background:#126caa;color:white;border-color:#126caa}.primary:hover{background:#075482}
+.choices{display:grid;gap:9px}.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:16px}.control{background:#f2f8fc;padding:12px;border-radius:12px}
+label{display:block;font-weight:650;margin-bottom:7px}input[type=range]{width:100%;accent-color:#126caa}input[type=text],textarea,select{width:100%;padding:10px;border:1px solid #b8d0e0;border-radius:10px;font:inherit;background:white}
+textarea{min-height:84px;resize:vertical}.stat{font-size:23px;font-weight:800;color:#126caa}.hint{background:#fff8e5;border-left:4px solid #f2bb39;padding:12px 15px;border-radius:8px;margin-top:12px}
+#window{height:210px;border:12px solid #d8e4ec;border-radius:15px;position:relative;background:linear-gradient(160deg,#a7ddf7,#d4efff);overflow:hidden}
+#window:before{content:"";position:absolute;left:50%;top:0;bottom:0;width:10px;background:#d8e4ec}
+#droplets{position:absolute;inset:0;pointer-events:none;transition:opacity .3s}
+.drop{position:absolute;background:radial-gradient(circle at 30% 25%,#fff9,#6db7db88 65%,#2774a644);border:1px solid #ffffffaa;border-radius:48% 52% 55% 45%;width:9px;height:13px}
+#chart{width:100%;height:220px;border:1px solid var(--line);border-radius:12px;background:white}
+#carGlass{height:180px;border-radius:75px 75px 20px 20px;border:9px solid #263c4b;background:linear-gradient(160deg,#b9dff1,#edf9ff);position:relative;overflow:hidden}
+#carFog{position:absolute;inset:0;background:#f0f6f9;opacity:.78;transition:opacity .4s}#carGlass:after{content:"";position:absolute;bottom:8px;left:12%;right:12%;height:7px;border-radius:8px;background:#263c4b}
+small{color:#526b7d}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.result{padding:14px;background:#edf9f3;border:1px solid #bde7cf;border-radius:12px;margin-top:12px}
+.steam{display:flex;gap:7px;flex-wrap:wrap}.steam span{padding:9px 12px;border-radius:9px;font-weight:750;background:#e8f4fd}
+footer{text-align:center;color:#5c7280;padding:25px} @media print{button,.noprint{display:none!important}body{background:white}section{break-inside:avoid;box-shadow:none}main{max-width:100%}}
+</style></head><body><main>
+<header><span class="tag">STEM · 7 клас · дослідження вдома й онлайн</span><h1>Таємниця крапель: чому запотівають вікна?</h1>
+<p class="lead">Вода з'являється на склі, хоча ніхто її не наливав. Звідки вона взялася? Дослідіть фізичні закони у власній кімнаті, автомобілі, біля холодильника й навіть на листі рослин.</p></header>
+<section><h2>01 · Помічайте явища навколо</h2><div class="grid">
+<div class="tile"><div class="scene"><svg viewBox="0 0 300 145" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="145" fill="#bce3f8"/><path d="M0 98L70 54l58 42 67-52 105 55v46H0" fill="#86b5a0"/><rect x="45" y="5" width="210" height="135" fill="#e9f8ff" opacity=".35" stroke="#fefefe" stroke-width="9"/><path d="M150 5v135M45 73h210" stroke="#fff" stroke-width="8"/><g fill="#fff" opacity=".78"><circle cx="84" cy="37" r="6"/><circle cx="118" cy="59" r="5"/><circle cx="201" cy="32" r="8"/><circle cx="215" cy="99" r="6"/><circle cx="100" cy="111" r="8"/><circle cx="176" cy="117" r="5"/></g></svg></div><h3>Вікно в кімнаті</h3><p>Чому взимку на внутрішній поверхні скла інколи з'являються краплі?</p></div>
+<div class="tile"><div class="scene"><svg viewBox="0 0 300 145" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="145" fill="#c7ddea"/><path d="M22 120Q32 35 100 23H204Q269 35 278 120Z" fill="#354d65"/><path d="M41 113Q50 49 106 40H196Q251 49 259 113Z" fill="#d9f0f6"/><g fill="#fff" opacity=".75"><circle cx="85" cy="74" r="9"/><circle cx="114" cy="91" r="6"/><circle cx="166" cy="62" r="10"/><circle cx="215" cy="88" r="7"/></g><path d="M40 119h220" stroke="#1a3447" stroke-width="8"/></svg></div><h3>Лобове скло автомобіля</h3><p>Чому воно запотіває і як повернути прозорість?</p></div>
+<div class="tile"><div class="scene"><svg viewBox="0 0 300 145" xmlns="http://www.w3.org/2000/svg"><rect width="300" height="145" fill="#eaf4fb"/><rect x="110" y="24" width="80" height="105" rx="16" fill="#8cc7df" stroke="#4487a9" stroke-width="5"/><rect x="124" y="11" width="52" height="19" rx="5" fill="#a7c5d8"/><path d="M115 83h70v28q0 14-15 14h-40q-15 0-15-14z" fill="#4098c3" opacity=".6"/><g fill="#5aa4c9"><ellipse cx="103" cy="61" rx="5" ry="9"/><ellipse cx="196" cy="49" rx="6" ry="10"/><ellipse cx="201" cy="91" rx="5" ry="8"/><ellipse cx="97" cy="108" rx="6" ry="10"/></g></svg></div><h3>Пляшка з холодильника</h3><p>Чому її зовнішня поверхня мокра, хоча кришка закрита?</p></div>
+</div><p><strong>Оберіть гіпотезу:</strong></p><div class="choices" id="hyp">
+<button data-h="Вода просочується крізь скло">Вода просочується крізь скло</button>
+<button data-h="Водяна пара з повітря перетворюється на краплі">Водяна пара з повітря перетворюється на краплі</button>
+<button data-h="Холодне скло створює нову воду">Холодне скло створює нову воду</button></div><p id="hypMsg" aria-live="polite"></p>
+<div class="hint"><strong>Наукова підказка.</strong> Вода є в повітрі у вигляді невидимої водяної пари. Коли поверхня холодніша за точку роси повітря поблизу неї, пара може конденсуватися на цій поверхні. Речовина залишається H₂O — змінюється її агрегатний стан.</div></section>
+<section><h2>02 · Цифрова лабораторія «Коли з'являться краплі?»</h2><p>Змініть умови. Зробіть прогноз, а потім перевірте його. У моделі температура повітря й вологість визначають <strong>точку роси</strong>; конденсація можлива, коли скло не тепліше за неї.</p>
+<div class="grid"><div><div id="window" aria-label="Модель вікна"><div id="droplets"></div></div><p id="glassState" class="stat" aria-live="polite">—</p></div>
+<div class="controls"><div class="control"><label for="air">Температура повітря: <output id="airV">22</output> °C</label><input id="air" type="range" min="5" max="35" value="22"></div>
+<div class="control"><label for="rh">Відносна вологість: <output id="rhV">60</output> %</label><input id="rh" type="range" min="20" max="95" value="60"></div>
+<div class="control"><label for="glass">Температура скла: <output id="glassV">12</output> °C</label><input id="glass" type="range" min="-5" max="35" value="12"></div>
+<div class="control"><div>Розрахована точка роси</div><div class="stat"><span id="dew">—</span> °C</div><small>Наближений розрахунок за формулою Магнуса</small></div></div></div>
+<div class="row"><button id="record" class="primary">Додати дослід до таблиці</button><button id="resetExperiments">Очистити досліди</button></div>
+<div style="overflow:auto"><table style="width:100%;border-collapse:collapse;margin-top:12px" id="experiments"><thead><tr><th>№</th><th>Повітря, °C</th><th>Вологість, %</th><th>Скло, °C</th><th>Точка роси, °C</th><th>Прогноз</th></tr></thead><tbody></tbody></table></div>
+<h3 style="margin-top:20px">Графік: вологість і точка роси</h3><p><small>Температура повітря фіксована на поточному значенні. Змінюйте її та порівнюйте криві.</small></p><svg id="chart" viewBox="0 0 600 220" role="img" aria-label="Графік точки роси залежно від відносної вологості"></svg>
+<div class="hint">Модель спрощена: вона не враховує рух повітря, теплову інерцію скла й швидкість утворення крапель. Краплі на малюнку умовні, а не точний прогноз їхньої кількості.</div></section>
+<section><h2>03 · Інженерний виклик «Як прибрати запотівання?»</h2><p>Уявіть автомобіль, який стоїть на місці. Потрібно зробити лобове скло прозорим. Спробуйте різні дії та поясніть, чому вони працюють.</p>
+<div class="grid"><div><div id="carGlass"><div id="carFog"></div></div><p class="stat" id="carState">Скло запітніле</p></div>
+<div><div class="control"><label for="heat">Тепле обдування скла</label><input id="heat" type="range" min="0" max="3" value="0" step="1"><small>0 — вимкнено; 3 — інтенсивно</small></div>
+<div class="control"><label for="dry">Осушення повітря кондиціонером</label><input id="dry" type="checkbox"> Увімкнути</div>
+<div class="control"><label for="fresh">Подача зовнішнього повітря</label><input id="fresh" type="checkbox"> Увімкнути</div>
+<p id="carExplain" aria-live="polite"></p></div></div><div class="hint">Це навчальна модель. У реальному автомобілі ефективність залежить від погоди й конструкції системи клімат-контролю. Під час руху налаштування виконує водій без відволікання від дороги.</div></section>
+<section><h2>04 · Дослідження вдома: оберіть одне</h2><p>Спеціального обладнання не потрібно. Якщо немає можливості провести дослід, скористайтеся цифровою лабораторією вище.</p>
+<div class="grid"><div class="tile"><h3>А · Холодна склянка</h3><p>Налийте холодну воду в суху склянку. Через кілька хвилин огляньте її зовні. Чи з'явилися краплі?</p></div>
+<div class="tile"><h3>Б · Дзеркало</h3><p>Обережно подихайте на невелике дзеркальце. Поспостерігайте, як змінюється його поверхня і як швидко зникає запотівання.</p></div>
+<div class="tile"><h3>В · Прозора кришка</h3><p>Налийте в контейнер трохи теплої (не гарячої) води, накрийте прозорою кришкою й спостерігайте за краплями.</p></div></div>
+<p><label for="homeChoice">Який дослід Ви обрали?</label><select id="homeChoice"><option>Цифрова лабораторія</option><option>Холодна склянка</option><option>Дзеркало</option><option>Прозора кришка</option></select></p>
+<label for="homeNotes">Спостереження: що відбулося та як це пояснити?</label><textarea id="homeNotes" placeholder="Опишіть побачене та поясніть роль температури й водяної пари..."></textarea></section>
+<section><h2>05 · Біологія та хімія навколо нас</h2><div class="grid"><div class="tile"><h3>🌿 Роса на листі</h3><p>Уночі поверхня листка може охолонути до точки роси. Тоді водяна пара з повітря конденсується. Рослини також виділяють воду під час транспірації, але не кожна крапля на листі — результат транспірації.</p></div>
+<div class="tile"><h3>🫁 Волога у видиху</h3><p>Видихуване повітря містить водяну пару. Коли воно торкається холодного дзеркала, частина пари може перетворитися на дрібні краплі.</p></div>
+<div class="tile"><h3>🧪 Одна речовина — різні стани</h3><p>Під час конденсації молекули H₂O не перетворюються на іншу речовину. Це фізичне явище, а не хімічна реакція.</p></div></div>
+<p><strong>Перевірте себе:</strong> Чи правильне твердження «Краплі на холодній пляшці з'явилися з води всередині»?</p><div class="row"><button id="truthYes">Так</button><button id="truthNo">Ні</button></div><p id="truthMsg" aria-live="polite"></p></section>
+<section><h2>06 · Створіть алгоритм «Розумне вікно»</h2><p>Ваш пристрій отримує дані від датчиків температури повітря, вологості та температури скла. Він має попередити про ризик конденсації.</p>
+<div class="tile"><strong>Алгоритм:</strong><pre style="white-space:pre-wrap">якщо температура скла ≤ точка роси:
+    попередити про ризик запотівання
+    запропонувати підвищити температуру скла
+    або зменшити вологість повітря
+інакше:
+    скло, імовірно, залишиться прозорим</pre></div>
+<p>Випробуйте алгоритм на трьох наборах параметрів у цифровій лабораторії. Чи завжди він правильно визначає ризик?</p><label for="algorithmNotes">Що Ви вдосконалили б у такому пристрої?</label><textarea id="algorithmNotes" placeholder="Наприклад, додати датчик, сповіщення або автоматичне керування..."></textarea></section>
+<section><h2>07 · Ваш STEM-звіт</h2><div class="steam"><span>S · Science</span><span>T · Technology</span><span>E · Engineering</span><span>A · Art</span><span>M · Mathematics</span></div>
+<p><small>Мистецький елемент: намалюйте або опишіть інфографіку «Подорож краплі» — від водяної пари до краплини на склі.</small></p>
+<label for="finalHyp">Моя гіпотеза</label><textarea id="finalHyp" placeholder="Я припускаю, що..."></textarea>
+<label for="finalConclusion">Мій висновок на основі дослідів</label><textarea id="finalConclusion" placeholder="Я встановив / встановила, що..."></textarea>
+<label for="finalDesign">Моє інженерне рішення</label><textarea id="finalDesign" placeholder="Щоб запобігти запотіванню, я пропоную..."></textarea>
+<div class="row"><button class="primary" id="download">Зберегти звіт (.txt)</button><button id="print">Друкувати / зберегти PDF</button></div><p><small>У звіт потраплять Ваша гіпотеза, спостереження, параметри віртуальних дослідів, висновок та інженерне рішення. PDF можна зберегти через меню друку браузера.</small></p></section>
+<footer>STEM Online · 7 клас · Самостійний інтерактивний урок · Усі симулятори працюють без інтернету</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id), experiments=[];
+function dew(t,r){const a=17.62,b=243.12,g=Math.log(r/100)+(a*t)/(b+t);return b*g/(a-g)}
+function update(){
+const a=+$('air').value,r=+$('rh').value,g=+$('glass').value,d=dew(a,r);
+$('airV').textContent=a;$('rhV').textContent=r;$('glassV').textContent=g;$('dew').textContent=d.toFixed(1);
+const risk=g<=d;$('glassState').textContent=risk?'💧 Можлива конденсація':'☀️ Скло залишається прозорим';
+const amount=Math.max(0,Math.min(1,(d-g+1)/12));
+$('droplets').style.opacity=risk?Math.max(.2,amount):0;
+drawChart(a,r,d);return {a,r,g,d,risk}
+}
+const dots=$('droplets');for(let i=0;i<90;i++){const e=document.createElement('span');e.className='drop';e.style.left=((i*67+19)%96)+'%';e.style.top=((i*37+13)%92)+'%';e.style.transform=`scale(${.5+(i%5)*.17})`;dots.appendChild(e)}
+function drawChart(a,r,d){const svg=$('chart'),min=-30,max=40, X=v=>45+(v-20)/75*520,Y=v=>185-(v-min)/(max-min)*155;
+let s='<rect width="600" height="220" fill="white"/>';
+for(let y=-20;y<=40;y+=10)s+=`<line x1="45" x2="565" y1="${Y(y)}" y2="${Y(y)}" stroke="#e4edf3"/><text x="8" y="${Y(y)+4}" font-size="12" fill="#536879">${y}°</text>`;
+for(let x=20;x<=95;x+=15)s+=`<text x="${X(x)-8}" y="206" font-size="12" fill="#536879">${x}%</text>`;
+let pts=[];for(let x=20;x<=95;x+=1)pts.push(`${X(x)},${Y(dew(a,x))}`);
+s+=`<polyline points="${pts.join(' ')}" fill="none" stroke="#1677b8" stroke-width="3"/><circle cx="${X(r)}" cy="${Y(d)}" r="6" fill="#e99928" stroke="white" stroke-width="2"/><text x="240" y="18" fill="#19334b" font-size="13">Точка роси, °C</text>`;svg.innerHTML=s}
+['air','rh','glass'].forEach(id=>$(id).addEventListener('input',update));update();
+$('record').onclick=()=>{const x=update();experiments.push(x);renderRows()};
+$('resetExperiments').onclick=()=>{experiments.length=0;renderRows()};
+function renderRows(){$('experiments').querySelector('tbody').innerHTML=experiments.map((e,i)=>`<tr style="border-bottom:1px solid #dce8ef;text-align:center"><td>${i+1}</td><td>${e.a}</td><td>${e.r}</td><td>${e.g}</td><td>${e.d.toFixed(1)}</td><td>${e.risk?'Краплі':'Прозоро'}</td></tr>`).join('')}
+$('hyp').querySelectorAll('button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#hyp button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');$('hypMsg').textContent=b.dataset.h.includes('Водяна пара')?'Гіпотеза узгоджується з фізичним поясненням. Перевірте її в симуляторі.':'Цікава версія. Перевірте, чи пояснює вона появу крапель на зовнішній поверхні закритої пляшки.'});
+function updateCar(){const h=+$('heat').value,d=$('dry').checked,f=$('fresh').checked;let score=h*23+(d?29:0)+(f?19:0);let fog=Math.max(.05,.85-score/105);$('carFog').style.opacity=fog;$('carState').textContent=score>=72?'✅ Скло майже прозоре':score>=38?'🟡 Запотівання зменшилося':'🌫️ Скло запітніле';$('carExplain').textContent='Тепле обдування підвищує температуру скла. Осушення зменшує вологість повітря. Подача зовнішнього повітря може допомогти, якщо воно сухіше за повітря в салоні.'}
+['heat','dry','fresh'].forEach(id=>$(id).addEventListener('input',updateCar));updateCar();
+$('truthYes').onclick=()=>$('truthMsg').textContent='Не зовсім: на зовнішній поверхні закритої пляшки зазвичай конденсується водяна пара з навколишнього повітря.';
+$('truthNo').onclick=()=>$('truthMsg').textContent='Правильно: волога надходить із повітря й конденсується на холодній поверхні пляшки.';
+function report(){return `ТАЄМНИЦЯ КРАПЕЛЬ — STEM-ЗВІТ, 7 КЛАС\n\nГіпотеза: ${$('finalHyp').value||'—'}\n\nДосліди в симуляторі:\n${experiments.map((e,i)=>`${i+1}. Повітря ${e.a} °C, вологість ${e.r} %, скло ${e.g} °C, точка роси ${e.d.toFixed(1)} °C: ${e.risk?'конденсація можлива':'конденсація малоймовірна'}`).join('\n')||'Не записано'}\n\nДомашній дослід: ${$('homeChoice').value}\nСпостереження: ${$('homeNotes').value||'—'}\n\nВисновок: ${$('finalConclusion').value||'—'}\n\nІнженерне рішення: ${$('finalDesign').value||'—'}\n\nУдосконалення алгоритму: ${$('algorithmNotes').value||'—'}\n`}
+$('download').onclick=()=>{const blob=new Blob(['\ufeff'+report()],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='stem_taiemnytsia_krapel_zvit.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+$('print').onclick=()=>{let box=$('printReport');if(!box){box=document.createElement('section');box.id='printReport';document.querySelector('footer').before(box)}box.innerHTML='<h2>Мій STEM-звіт</h2><pre style="white-space:pre-wrap;font:inherit"></pre>';box.querySelector('pre').textContent=report();window.print()};
+</script></body></html>
